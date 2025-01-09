@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hobby/sreens/create.dart';
-import 'package:hobby/sreens/searchpage.dart';
+import 'package:hobby/sreens/home/usermail.dart';
 
 class Bottom extends StatefulWidget {
   const Bottom({super.key});
@@ -21,7 +20,7 @@ class _BottomState extends State<Bottom> {
 
   final List<Widget> pages = [
     const Homepage(), // Page principale
-    const Create(), // Page pour Create
+    const CreatePage(), // Page pour Create
     const SearchPage(), // Page de recherche
     const SendPage(), // Page d'envoi
   ];
@@ -119,12 +118,17 @@ class _BottomState extends State<Bottom> {
   }
 }
 
-class Homepage extends StatelessWidget {
+class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
   @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  @override
   Widget build(BuildContext context) {
-    return Homepage();
+    return Usermail();
   }
 }
 
@@ -133,7 +137,12 @@ class CreatePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Create();
+    return Center(
+      child: Text(
+        'Create Page',
+        style: TextStyle(fontSize: 24),
+      ),
+    );
   }
 }
 
@@ -142,7 +151,12 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Searchpage();
+    return Center(
+      child: Text(
+        'Search Page',
+        style: TextStyle(fontSize: 24),
+      ),
+    );
   }
 }
 

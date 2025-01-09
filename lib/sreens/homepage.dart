@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hobby/sreens/bottom.dart';
+import 'package:hobby/sreens/bottom.dart'; // Assurez-vous que ce chemin est correct.
 import 'package:iconsax/iconsax.dart';
 
 class Homepage extends StatefulWidget {
@@ -11,20 +11,13 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  String userEmail = '';
-  int _selectedIndex = 0;
-
-  final List<Widget> _pages = [
-    const HomePage(),
-    const CreatePage(),
-    const SearchPage(),
-    const ChatPage(),
-  ];
+  String userEmail =
+      ''; // Déclarez userEmail ici pour récupérer l'email de l'utilisateur.
 
   @override
   void initState() {
     super.initState();
-    _getUserEmail();
+    _getUserEmail(); // Appel de la fonction pour récupérer l'email dès que l'écran est initialisé
   }
 
   // Fonction pour obtenir l'email de l'utilisateur connecté
@@ -32,126 +25,64 @@ class _HomepageState extends State<Homepage> {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       setState(() {
-        userEmail = user.email ?? '';
+        userEmail = user.email ?? ''; // Récupérer l'email de l'utilisateur
       });
     } else {
       setState(() {
-        userEmail = 'No user logged in';
+        userEmail = 'No user logged in'; // Si aucun utilisateur n'est connecté
       });
     }
   }
 
-  // Fonction pour gérer la navigation entre les pages
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  const CircleAvatar(
-                    backgroundImage: AssetImage('assets/img/LOGO HOBBY.png'),
-                    radius: 35,
-                    backgroundColor: Colors.white,
-                  ),
-                  const SizedBox(width: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Welcome back,',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Color(0xFF2E2E2E),
-                        ),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                const CircleAvatar(
+                  backgroundImage: AssetImage('assets/img/LOGO HOBBY.png'),
+                  radius: 35,
+                  backgroundColor: Colors.white,
+                ),
+                const SizedBox(width: 20),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Welcome back,',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Color(0xFF2E2E2E),
                       ),
-                      Text(
-                        userEmail.isNotEmpty ? userEmail : 'Guest',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Color(0xFF000000),
-                        ),
+                    ),
+                    Text(
+                      userEmail.isNotEmpty ? userEmail : 'Guest',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Color(0xFF000000),
                       ),
-                    ],
-                  ),
-                  const Spacer(),
-                  Icon(
-                    Iconsax.search_normal_1,
-                    color: Colors.black,
-                    size: 30,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              // Display the selected page
-              Expanded(
-                child: _pages[_selectedIndex],
-              ),
-            ],
-          ),
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                Icon(
+                  Iconsax.search_normal_1,
+                  color: Colors.black,
+                  size: 30,
+                ),
+              ],
+            ),
+            // Affichage de la page sélectionnée ou d'autres widgets ici
+          ],
         ),
-        bottomNavigationBar: Bottom());
-  }
-}
-
-// Placeholder pages for the navigation items
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Home Page',
-        style: TextStyle(fontSize: 24),
       ),
-    );
-  }
-}
-
-class CreatePage extends StatelessWidget {
-  const CreatePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Create Page',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-}
-
-class SearchPage extends StatelessWidget {
-  const SearchPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Search Page',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-}
-
-class ChatPage extends StatelessWidget {
-  const ChatPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Chat Page',
-        style: TextStyle(fontSize: 24),
-      ),
+      bottomNavigationBar: const Bottom(),
     );
   }
 }
