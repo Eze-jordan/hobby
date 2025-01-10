@@ -27,7 +27,7 @@ class _FirstpageState extends State<Firstpage> {
     {'name': 'Photo', 'icon': Icons.camera_alt},
   ];
 
-  final Set<int> selectedHobbies = Set<int>();
+  final Set<int> selectedHobbies = <int>{};
 
   Color generateRandomColor() {
     Random random = Random();

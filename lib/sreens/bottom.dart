@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hobby/sreens/createPostPage.dart';
 import 'package:hobby/sreens/home/usermail.dart';
 
 class Bottom extends StatefulWidget {
@@ -20,7 +21,7 @@ class _BottomState extends State<Bottom> {
 
   final List<Widget> pages = [
     const Homepage(), // Page principale
-    const CreatePage(), // Page pour Create
+    const CreatePostPage(), // Page pour Create
     const SearchPage(), // Page de recherche
     const SendPage(), // Page d'envoi
   ];
@@ -80,12 +81,20 @@ class _BottomState extends State<Bottom> {
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(20)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 5,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: List.generate(navItems.length, (index) {
-                      if (index == selectedIndex)
+                      if (index == selectedIndex) {
                         return const SizedBox.shrink();
+                      }
 
                       return GestureDetector(
                         onTap: () {

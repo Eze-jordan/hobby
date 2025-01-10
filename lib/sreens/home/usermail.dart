@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hobby/sreens/createPostPage.dart';
 import 'package:iconsax/iconsax.dart';
 
 class Usermail extends StatefulWidget {
@@ -122,20 +123,29 @@ class _UsermailState extends State<Usermail> {
                     const SizedBox(
                       width: 20,
                     ),
-                    Container(
-                      height: 40,
-                      width: 100,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: const Color(0xFFCCF4E9)),
-                      child: const Center(
-                          child: Text(
-                        '+ Create',
-                        style: TextStyle(
-                            color: Color(0xFF000000),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17),
-                      )),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const CreatePostPage(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 100,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: const Color(0xFFCCF4E9)),
+                        child: const Center(
+                            child: Text(
+                          '+ Create',
+                          style: TextStyle(
+                              color: Color(0xFF000000),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17),
+                        )),
+                      ),
                     ),
                   ],
                 ),
