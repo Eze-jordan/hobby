@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
 class CreatePostPage extends StatefulWidget {
   const CreatePostPage({super.key});
@@ -11,9 +10,12 @@ class CreatePostPage extends StatefulWidget {
 }
 
 class _CreatePostPageState extends State<CreatePostPage> {
-  TextEditingController _postController = TextEditingController();
+  TextEditingController _titleController =
+      TextEditingController(); // Titre de la publication
+  TextEditingController _contentController =
+      TextEditingController(); // Contenu de la publication
   TextEditingController _urlController =
-      TextEditingController(); // Champ pour l'URL
+      TextEditingController(); // URL de l'image
   String _selectedHobby = ''; // Hobby sélectionné
   String userEmail = ''; // Variable pour stocker l'email de l'utilisateur
   List<String> userHobbies = []; // Liste des hobbies de l'utilisateur
@@ -65,8 +67,9 @@ class _CreatePostPageState extends State<CreatePostPage> {
       if (user != null) {
         await FirebaseFirestore.instance.collection('posts').add({
           'userId': user.uid,
+          'title': _titleController.text,
           'selectedHobby': _selectedHobby,
-          'postContent': _postController.text,
+          'postContent': _contentController.text,
           'postUrl': _urlController.text,
           'createdAt': FieldValue.serverTimestamp(),
         });
@@ -74,8 +77,14 @@ class _CreatePostPageState extends State<CreatePostPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Publication créée avec succès!')),
         );
-        _postController.clear();
+
+        // Réinitialiser les contrôleurs après la publication
+        _titleController.clear();
+        _contentController.clear();
         _urlController.clear();
+
+        // Retourner à la page d'accueil
+        Navigator.pop(context); // Fermer la page actuelle (CreatePostPage)
       } else {
         print("Utilisateur non authentifié");
       }
@@ -129,7 +138,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
             // Champ de texte pour le titre de la publication
             TextField(
               maxLines: 1,
-              controller: _postController,
+              controller: _titleController,
               decoration: InputDecoration(
                 labelText: 'Nom de la publication',
                 hintText: 'Entrez le nom de la publication',
@@ -143,7 +152,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
             // Champ de texte pour le contenu de la publication
             TextField(
               maxLines: 4,
-              controller: _postController,
+              controller: _contentController,
               decoration: InputDecoration(
                 labelText: 'Contenu de la publication',
                 hintText: 'Entrez le contenu de la publication',
