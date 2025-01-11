@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hobby/sreens/bottom.dart';
 
 class CreatePostPage extends StatefulWidget {
   const CreatePostPage({super.key});
@@ -10,11 +11,11 @@ class CreatePostPage extends StatefulWidget {
 }
 
 class _CreatePostPageState extends State<CreatePostPage> {
-  TextEditingController _titleController =
+  final TextEditingController _titleController =
       TextEditingController(); // Titre de la publication
-  TextEditingController _contentController =
+  final TextEditingController _contentController =
       TextEditingController(); // Contenu de la publication
-  TextEditingController _urlController =
+  final TextEditingController _urlController =
       TextEditingController(); // URL de l'image
   String _selectedHobby = ''; // Hobby sélectionné
   String userEmail = ''; // Variable pour stocker l'email de l'utilisateur
@@ -67,7 +68,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
       if (user != null) {
         await FirebaseFirestore.instance.collection('posts').add({
           'userId': user.uid,
-          'title': _titleController.text,
+          'postTitle': _titleController.text,
           'selectedHobby': _selectedHobby,
           'postContent': _contentController.text,
           'postUrl': _urlController.text,
@@ -102,7 +103,13 @@ class _CreatePostPageState extends State<CreatePostPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             GestureDetector(
-                onTap: () => Navigator.pop(context),
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const Bottom(),
+                    ),
+                  );
+                },
                 child: const Icon(Icons.arrow_back, color: Colors.black)),
             const SizedBox(height: 20),
             // Affichage de l'email de l'utilisateur
@@ -202,6 +209,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
               onPressed: savePostToFirebase,
               child: const Text('Publier'),
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
