@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hobby/sreens/createPostPage.dart';
 import 'package:hobby/sreens/home/usermail.dart';
+import 'package:hobby/sreens/search.dart';
 
 class Bottom extends StatefulWidget {
   const Bottom({super.key});
@@ -160,12 +161,7 @@ class SearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Search Page',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
+    return Search();
   }
 }
 

@@ -55,12 +55,24 @@ class _FirstpageState extends State<Firstpage> {
           'selectedHobbies': selectedHobbyNames,
         });
 
-        print("Hobbies enregistrés dans Firebase");
+        // Afficher une notification de succès
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Hobbies enregistrés dans Firebase'),
+            duration: Duration(seconds: 2),
+          ),
+        );
       } else {
         print("Utilisateur non authentifié");
       }
     } catch (e) {
       print("Erreur lors de l'enregistrement dans Firebase: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Erreur lors de l\'enregistrement des hobbies'),
+          duration: Duration(seconds: 2),
+        ),
+      );
     }
   }
 
@@ -102,13 +114,21 @@ class _FirstpageState extends State<Firstpage> {
                         }
                       });
                     },
-                    child: Container(
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: isSelected
                             ? generateRandomColor()
                             : const Color(0xFFF3F3F3),
                         borderRadius: BorderRadius.circular(30),
+                        boxShadow: [
+                          if (isSelected)
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              blurRadius: 10,
+                            ),
+                        ],
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
