@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hobby/sreens/bottom.dart';
+import 'package:hobby/sreens/profile.dart';
 
 class CreatePostPage extends StatefulWidget {
   const CreatePostPage({super.key});
@@ -115,10 +116,19 @@ class _CreatePostPageState extends State<CreatePostPage> {
             // Affichage de l'email de l'utilisateur
             Row(
               children: [
-                const CircleAvatar(
-                  backgroundImage: AssetImage('assets/img/LOGO HOBBY.png'),
-                  radius: 30,
-                  backgroundColor: Colors.white,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const Profile(),
+                      ),
+                    );
+                  },
+                  child: const CircleAvatar(
+                    backgroundImage: AssetImage('assets/img/LOGO HOBBY.png'),
+                    radius: 30,
+                    backgroundColor: Colors.white,
+                  ),
                 ),
                 const SizedBox(width: 20),
                 Column(
