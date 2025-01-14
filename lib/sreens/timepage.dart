@@ -16,7 +16,7 @@ class _TimepageState extends State<Timepage> {
   void initState() {
     super.initState();
     // Naviguer vers la première page après 1 seconde
-    Timer(const Duration(seconds: 1), () {
+    Timer(const Duration(seconds: 10), () {
       Navigator.of(context).push(
         MaterialPageRoute(
             builder: (context) => StreamBuilder(
