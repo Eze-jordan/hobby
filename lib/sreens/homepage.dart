@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hobby/sreens/bottom.dart'; // Assurez-vous que ce chemin est correct.
+import 'package:hobby/sreens/profile.dart';
 import 'package:iconsax/iconsax.dart';
 
 class Homepage extends StatefulWidget {
@@ -43,10 +44,20 @@ class _HomepageState extends State<Homepage> {
           children: [
             Row(
               children: [
-                const CircleAvatar(
-                  backgroundImage: AssetImage('assets/img/LOGO HOBBY.png'),
-                  radius: 35,
-                  backgroundColor: Colors.white,
+                GestureDetector(
+                  onTap: () {
+                    // Naviguer vers la page de profil
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const Profile(),
+                      ),
+                    );
+                  },
+                  child: const CircleAvatar(
+                    backgroundImage: AssetImage('assets/img/LOGO HOBBY.png'),
+                    radius: 35,
+                    backgroundColor: Colors.white,
+                  ),
                 ),
                 const SizedBox(width: 20),
                 Column(

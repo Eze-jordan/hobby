@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hobby/sreens/activite/community.dart';
+import 'package:hobby/sreens/profile.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:hobby/sreens/createPostPage.dart';
 
@@ -58,10 +59,19 @@ class _UsermailState extends State<Usermail> {
           children: [
             Row(
               children: [
-                const CircleAvatar(
-                  backgroundImage: AssetImage('assets/img/LOGO HOBBY.png'),
-                  radius: 35,
-                  backgroundColor: Colors.white,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const Profile(),
+                      ),
+                    );
+                  },
+                  child: const CircleAvatar(
+                    backgroundImage: AssetImage('assets/img/LOGO HOBBY.png'),
+                    radius: 35,
+                    backgroundColor: Colors.white,
+                  ),
                 ),
                 const SizedBox(width: 20),
                 Column(
